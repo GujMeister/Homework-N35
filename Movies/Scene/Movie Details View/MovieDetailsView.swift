@@ -135,7 +135,7 @@ struct MovieDetailsView: View {
                     
                     HStack(spacing: 4) {
                         Image("Clock")
-                        Text(String(viewModel.movieInfo?.runtime ?? 10))
+                        Text(String(viewModel.movieInfo?.runtime ?? 10) + " Minutes")
                             .foregroundStyle(Color(hex: "#92929D"))
                     }
                     
@@ -214,7 +214,6 @@ struct NavigationView : View {
     }
 }
 
-#Preview {
-    MovieDetailsView(movie: Movie(backdropPath: "EUF", genreIds: [1], id: 62000, overview: "AUF", posterPath: "EUF", releaseDate: "AUF", title: "EUF", voteAverage: 6.925, voteCount: 12))
-}
-
+//#Preview {
+//    MovieDetailsView(movie: Movie(id: 62012, posterPath: "asdasdasd", title: "asdasdasd"))
+//}

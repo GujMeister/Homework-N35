@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -15,13 +16,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="obG-Y5-kRd">
-                                <rect key="frame" x="196.66666666666666" y="832" width="0.0" height="0.0"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="STo-pw-n93">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="tintColor" systemColor="systemBackgroundColor"/>
+                            </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashScreen" translatesAutoresizingMaskIntoConstraints="NO" id="kef-5L-u7J">
                                 <rect key="frame" x="89" y="318.66666666666669" width="215" height="215.00000000000006"/>
                             </imageView>
@@ -29,7 +28,11 @@
                         <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="STo-pw-n93" firstAttribute="leading" secondItem="Bcu-3y-fUS" secondAttribute="leading" id="2Ra-oe-yWD"/>
+                            <constraint firstItem="Bcu-3y-fUS" firstAttribute="trailing" secondItem="STo-pw-n93" secondAttribute="trailing" id="59e-hb-rvL"/>
                             <constraint firstItem="kef-5L-u7J" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="5j3-Z1-n6J"/>
+                            <constraint firstAttribute="bottom" secondItem="STo-pw-n93" secondAttribute="bottom" id="AlW-66-gzF"/>
+                            <constraint firstItem="STo-pw-n93" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="BAl-b8-Yxs"/>
                             <constraint firstItem="kef-5L-u7J" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="vNo-T8-7le"/>
                         </constraints>
                     </view>
@@ -41,5 +44,8 @@
     </scenes>
     <resources>
         <image name="SplashScreen" width="215" height="215"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

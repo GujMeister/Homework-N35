@@ -13,7 +13,7 @@ struct MovieSearchView: View {
     @State private var searchText = ""
     @State private var selectedCategory = "Name"
     @State private var hasSearched = false
-    let categories = ["Name", "Year"]
+    let categories = ["Name", "Year", "Person"]
     
     // MARK: - View
     var body: some View {
@@ -30,7 +30,7 @@ struct MovieSearchView: View {
                 SearchBar(text: $searchText, onSearchButtonClicked: {
                     hasSearched = true
                     viewModel.searchMovies(query: searchText, category: selectedCategory)
-                })
+                }, placeholder: placeholderText(for: selectedCategory))
                 
                 // MARK: Dropdown menu
                 Menu {
@@ -39,12 +39,13 @@ struct MovieSearchView: View {
                             selectedCategory = category
                             hasSearched = false
                             viewModel.movieSearchDetails = []
+                            viewModel.personSearchResults = []
+                            searchText = ""
                         }) {
-                            HStack {
+                            if category == selectedCategory {
+                                Label(category, systemImage: "checkmark")
+                            } else {
                                 Text(category)
-                                if selectedCategory == category {
-                                    Image(systemName: "checkmark")
-                                }
                             }
                         }
                     }
@@ -58,7 +59,7 @@ struct MovieSearchView: View {
                 }
             }
             
-            // MARK: Progess View and Text before search
+            // MARK: Progress View and Text before search
             if viewModel.isLoading {
                 Spacer()
                 
@@ -70,13 +71,25 @@ struct MovieSearchView: View {
                 Spacer()
             } else if !hasSearched {
                 PlaceholderView(text: "Use The Magic Search!", secondText: "I will do my best to search everything\n relevant, I promise!")
-            } else if viewModel.movieSearchDetails.isEmpty {
-                PlaceholderView(text: "Oh No Isn’t This So Embarrassing?", secondText: "I cannot find any movie with this name.")
+            } else if selectedCategory == "Person" && viewModel.personSearchResults.isEmpty {
+                PlaceholderView(text: "Oh No Isn’t This So Embarrassing?", secondText: "I cannot find any person with this name.")
+            } else if viewModel.movieSearchDetails.isEmpty && viewModel.personSearchResults.isEmpty {
+                PlaceholderView(text: "Oh No Isn’t This So Embarrassing?", secondText: "I cannot find anything with this name.")
             } else {
-                List(viewModel.movieSearchDetails, id: \.title) { movie in
-                    MovieCell(movie: movie)
-                        .listRowSeparator(.hidden)
-                        .listRowBackground(Color(UIColor.systemBackground))
+                List {
+                    if selectedCategory == "Person" {
+                        ForEach(viewModel.personSearchResults, id: \.id) { person in
+                            PersonCell(person: person)
+                                .listRowSeparator(.hidden)
+                                .listRowBackground(Color(UIColor.systemBackground))
+                        }
+                    } else {
+                        ForEach(viewModel.movieSearchDetails, id: \.title) { movie in
+                            MovieCell(movie: movie)
+                                .listRowSeparator(.hidden)
+                                .listRowBackground(Color(UIColor.systemBackground))
+                        }
+                    }
                 }
                 .listStyle(PlainListStyle())
                 .padding([.horizontal], -13)
@@ -87,11 +100,25 @@ struct MovieSearchView: View {
             NotificationCenter.default.addObserver(forName: .resetSearch, object: nil, queue: .main) { _ in
                 searchText = ""
                 viewModel.movieSearchDetails = []
+                viewModel.personSearchResults = []
                 hasSearched = false
             }
         }
         .onDisappear {
             NotificationCenter.default.removeObserver(self, name: .resetSearch, object: nil)
+        }
+    }
+    
+    private func placeholderText(for category: String) -> String {
+        switch category {
+        case "Name":
+            return "try spider-man :)"
+        case "Year":
+            return "try 2012 :)"
+        case "Person":
+            return "try Jason :)"
+        default:
+            return "Search..."
         }
     }
 }
@@ -100,13 +127,15 @@ struct MovieSearchView: View {
 struct SearchBar: View {
     @Binding var text: String
     var onSearchButtonClicked: () -> Void
+    var placeholder: String
     
     var body: some View {
         HStack {
-            TextField("try Spider-man :)", text: $text)
+            TextField(placeholder, text: $text)
                 .font(.custom("Poppins-Regular", size: 14))
                 .frame(height: 35)
                 .padding(7)
+                .padding(.horizontal, 10)
                 .background(Color(.systemGray6))
                 .cornerRadius(15)
                 .padding(.horizontal, 10)
@@ -158,76 +187,3 @@ extension Notification.Name {
     MovieSearchView()
 }
 
-// MARK: - Cell
-struct MovieCell: View {
-    let movie: Search.SearchDetailInfo
-    
-    var body: some View {
-        HStack {
-            if let posterPath = movie.posterPath, let url = URL(string: "https://image.tmdb.org/t/p/w500/\(posterPath)") {
-                CacheAsyncImage(url: url) { AsyncImagePhase in
-                    switch AsyncImagePhase {
-                    case .success(let image):
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 95, height: 140)
-                            .cornerRadius(10)
-                    case .empty:
-                        ProgressView()
-                            .frame(width: 95, height: 140)
-                    case .failure:
-                        Image(systemName: "questionmark")
-                            .frame(width: 95, height: 140)
-                    @unknown default:
-                        Image(systemName: "questionmark")
-                            .frame(width: 95, height: 140)
-                    }
-                }
-            }
-            
-            VStack(alignment: .leading) {
-                Text(movie.title)
-                    .font(.custom("Poppins-Regular", size: 16))
-                
-                HStack {
-                    Image("Star")
-                        .foregroundColor(.yellow)
-                    Text(String(format: "%.1f", movie.voteAverage))
-                        .foregroundColor(Color(hex: "#FF8700"))
-                        .font(.custom("Montserrat-SemiBold", size: 12))
-                }
-                
-                HStack {
-                    Image("Ticket")
-                        .renderingMode(.template)
-                        .foregroundStyle(Color(UIColor.label))
-                    Text(movie.genres.first?.name ?? "Unknown")
-                        .font(.custom("Poppins-Regular", size: 12))
-                }
-                
-                HStack {
-                    Image("Calendar")
-                        .renderingMode(.template)
-                        .foregroundStyle(Color(UIColor.label))
-                    Text(movie.releaseDate.components(separatedBy: "-").first ?? "Unknown")
-                        .font(.custom("Poppins-Regular", size: 12))
-                }
-                
-                HStack {
-                    Image("Clock")
-                        .renderingMode(.template)
-                        .foregroundStyle(Color(UIColor.label))
-                    Text("\(movie.runtime) minutes")
-                        .font(.custom("Poppins-Regular", size: 12))
-                }
-            }
-            .foregroundColor(Color(UIColor.label))
-            .padding(.leading, 5)
-            
-            Spacer()
-        }
-        .padding()
-        .padding(.top, -20)
-    }
-}

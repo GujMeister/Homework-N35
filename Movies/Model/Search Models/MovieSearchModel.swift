@@ -7,7 +7,6 @@
 
 import Foundation
 
-// MARK: - SearchDetailInfo
 final class Search {
     struct SearchDetailInfo: Decodable {
         let genres: [Genre]
@@ -26,7 +25,7 @@ final class Search {
             case voteAverage = "vote_average"
         }
     }
-    // MARK: - Genre
+    
     struct Genre: Decodable {
         let id: Int
         let name: String
