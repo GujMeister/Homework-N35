@@ -1,5 +1,5 @@
 //
-//  NameSearchModel.swift
+//  SearchModel.swift
 //  Movies
 //
 //  Created by Luka Gujejiani on 07.06.24.
@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - DetailInfo
-struct NameSearch: Codable {
+struct SearchModel: Codable {
     let page: Int
     let results: [Result]
     let totalPages, totalResults: Int

@@ -13,13 +13,13 @@ struct MovieSearchView: View {
     @State private var searchText = ""
     @State private var selectedCategory = "Name"
     @State private var hasSearched = false
-    let categories = ["Name", "Genre", "Year"]
+    let categories = ["Name", "Year"]
     
     // MARK: - View
     var body: some View {
         VStack {
             HStack {
-                Text("Search Movies")
+                Text("Search")
                     .bold()
                     .font(.title)
                     .padding(.horizontal)
@@ -32,6 +32,7 @@ struct MovieSearchView: View {
                     viewModel.searchMovies(query: searchText, category: selectedCategory)
                 })
                 
+                // MARK: Dropdown menu
                 Menu {
                     ForEach(categories, id: \.self) { category in
                         Button(category, action: {
@@ -41,16 +42,26 @@ struct MovieSearchView: View {
                         })
                     }
                 } label: {
-                    Image(systemName: "slider.horizontal.3")
-                        .frame(width: 44, height: 44)
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(8)
-                        .padding(.horizontal)
+                    Image("Elipse")
+                        .resizable()
+                        .renderingMode(.template)
+                        .foregroundColor(Color(UIColor.label))
+                        .frame(width: 25, height: 25)
+                        .padding(.trailing, 15)
                 }
             }
             
-            if !hasSearched {
+            // MARK: Progess View and Text before search
+            if viewModel.isLoading {
+                Spacer()
+                
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle())
+                    .scaleEffect(1.5)
+                    .padding()
+                
+                Spacer()
+            } else if !hasSearched {
                 PlaceholderView(text: "Use The Magic Search!", secondText: "I will do my best to search everything\n relevant, I promise!")
             } else if viewModel.movieSearchDetails.isEmpty {
                 PlaceholderView(text: "Oh No Isn’t This So Embarrassing?", secondText: "I cannot find any movie with this name.")
@@ -85,20 +96,20 @@ struct SearchBar: View {
     
     var body: some View {
         HStack {
-            TextField("Search", text: $text)
-                .font(.custom("FiraGO-Bold", size: 14))
+            TextField("try Spider-man :)", text: $text)
+                .font(.custom("Poppins-Regular", size: 14))
                 .frame(height: 35)
                 .padding(7)
                 .background(Color(.systemGray6))
-                .cornerRadius(8)
+                .cornerRadius(15)
                 .padding(.horizontal, 10)
                 .overlay(
                     HStack {
                         Spacer()
                         Button(action: onSearchButtonClicked) {
                             Image(systemName: "magnifyingglass")
-                                .foregroundColor(.gray)
-                                .padding(.trailing, 10)
+                                .foregroundColor(Color(UIColor.label))
+                                .padding(.trailing, 20)
                         }
                     }
                 )
@@ -140,7 +151,6 @@ extension Notification.Name {
     MovieSearchView()
 }
 
-
 // MARK: - Cell
 struct MovieCell: View {
     let movie: Search.SearchDetailInfo
@@ -173,7 +183,6 @@ struct MovieCell: View {
                 Text(movie.title)
                     .font(.custom("Poppins-Regular", size: 16))
                 
-                // TODO: text font
                 HStack {
                     Image("Star")
                         .foregroundColor(.yellow)

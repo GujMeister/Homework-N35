@@ -10,8 +10,6 @@ import SwiftUI
 struct MovieRow: View {
     // MARK: Properties
     let movie: Movie
-    @State private var isVisible = false
-    //    let width: CGFloat
     let height: CGFloat
     
     // MARK: - View
@@ -25,16 +23,16 @@ struct MovieRow: View {
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .cornerRadius(10)
-                            .frame(width: 100, height: 145) // Adjust the width and height as needed
+                            .frame(width: 110, height: 165)
                     case .empty:
                         ProgressView()
-                            .frame(width: 100, height: 145) // Adjust the width and height as needed
+                            .frame(width: 100, height: 145)
                     case .failure(let error):
                         ErrorView(error: error)
-                            .frame(width: 100, height: 145) // Adjust the width and height as needed
+                            .frame(width: 100, height: 145)
                     @unknown default:
                         Image(systemName: "questionmark")
-                            .frame(width: 100, height: 145) // Adjust the width and height as needed
+                            .frame(width: 100, height: 145)
                     }
                 }
                 .padding(.top, 10)
@@ -42,25 +40,18 @@ struct MovieRow: View {
             Spacer()
             
             Text(movie.title)
-                .font(.custom("FiraGO-Regular", size: 12))
+                .font(.custom("Poppins-Regular", size: 12))
                 .multilineTextAlignment(.center)
                 .frame(maxWidth: .infinity)
-                .lineLimit(2) // Allows the title to span up to 2 lines
-                .minimumScaleFactor(0.5) // Adjusts the font size if the text doesn't fit
+                .lineLimit(3)
+                .minimumScaleFactor(0.5)
                 .layoutPriority(1)
                 .foregroundStyle(Color(UIColor.label))
             
             Spacer()
         }
         .frame(height: height)
-        .padding(.horizontal)
-        .opacity(isVisible ? 1 : 0)
-        .offset(y: isVisible ? 0 : 20)
-        .onAppear {
-            withAnimation(.easeIn(duration: 0.5)) {
-                isVisible = true
-            }
-        }
+        .padding(.horizontal, 10)
     }
 }
 

@@ -22,7 +22,7 @@ struct MovieDetailsView: View {
     
     // MARK: - View
     var body: some View {
-        MenuView(movie: movie)
+        NavigationView(movie: movie)
         
         ScrollView {
             VStack {
@@ -35,6 +35,14 @@ struct MovieDetailsView: View {
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
                                     .frame(height: 200)
+                                    .clipShape(
+                                        .rect(
+                                            topLeadingRadius: 0,
+                                            bottomLeadingRadius: 20,
+                                            bottomTrailingRadius: 20,
+                                            topTrailingRadius: 0
+                                        )
+                                    )
                                     .clipped()
                             case .empty:
                                 ProgressView()
@@ -49,23 +57,30 @@ struct MovieDetailsView: View {
                         }
                     }
                     
+                    // MARK: Rating and Star Image
                     HStack {
                         Spacer()
                         ZStack {
                             RoundedRectangle(cornerRadius: 10)
-                                .fill(Color(hex: "252836")).opacity(0.7)
-                            HStack {
+                                .fill(Color(hex: "252836")).opacity(0.9)
+                                .frame(height: 30)
+                            HStack(spacing: 5) {
                                 Image("Star")
+                                    .resizable()
+                                    .frame(width: 15, height: 15)
                                 Text(String(format: "%.1f", viewModel.movieInfo?.voteAverage ?? 0) )
                                     .foregroundColor(Color(hex: "FF8700"))
+                                    .font(.custom("Montserrat-SemiBold", size: 16))
+                                    .padding(.top, 2)
                             }
                         }
                         .frame(width: 65, height: 24)
-                        .padding(.top, -40)
+                        .padding(.top, -50)
                         .padding(.trailing, 20)
                     }
                 }
                 
+                // MARK: Poster and Title
                 HStack(alignment: .top) {
                     if let posterPath = viewModel.movieInfo?.posterPath, let url = URL(string: "https://image.tmdb.org/t/p/w500/\(posterPath)") {
                         CacheAsyncImage(url: url) { AsyncImagePhase in
@@ -75,7 +90,7 @@ struct MovieDetailsView: View {
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .cornerRadius(10)
-                                    .frame(width: 100, height: 150)
+                                    .frame(width: 114, height: 144)
                             case .empty:
                                 ProgressView()
                                     .frame(width: 100, height: 150)
@@ -89,23 +104,28 @@ struct MovieDetailsView: View {
                         }
                     }
                     
-                    VStack(alignment: .leading, spacing: 8) {
+                    VStack(alignment: .leading) {
                         Spacer()
                         
-                        Text(viewModel.movieInfo?.title ?? "")
-                            .padding(.bottom, 20)
-                            .frame(minWidth: 200)
-                            .font(.title)
-                            .bold()
+                        HStack {
+                            Text(viewModel.movieInfo?.title ?? "")
+                                .font(.custom("Montserrat-SemiBold", size: 18))
+//                                .frame(minWidth: 50, maxWidth: 210)
+//                            .padding(.leading, -20)
+                            .padding(.bottom, 3)
+                            
+                            Spacer()
+                        }
                     }
                 }
-                .padding(.top, -70)
+                .padding(.leading, 25)
+                .padding(.top, -90)
                 
                 
                 
-                // MARK: - Info View
+                // MARK: Info View
                 HStack {
-                    HStack {
+                    HStack(spacing: 4) {
                         Image("Calendar")
                         Text(viewModel.movieInfo?.releaseDate.components(separatedBy: "-").first ?? "2010")
                             .foregroundStyle(Color(hex: "#92929D"))
@@ -115,7 +135,7 @@ struct MovieDetailsView: View {
                         .frame(width: 1, height: 15)
                         .foregroundStyle(Color(hex: "#92929D"))
                     
-                    HStack {
+                    HStack(spacing: 4) {
                         Image("Clock")
                         Text(String(viewModel.movieInfo?.runtime ?? 10))
                             .foregroundStyle(Color(hex: "#92929D"))
@@ -125,41 +145,38 @@ struct MovieDetailsView: View {
                         .frame(width: 1, height: 15)
                         .foregroundStyle(Color(hex: "#92929D"))
                     
-                    HStack {
+                    HStack(spacing: 4) {
                         Image("Ticket")
                         Text(viewModel.movieInfo?.genres.first?.name ?? "Unknown")
                             .foregroundStyle(Color(hex: "#92929D"))
                     }
                 }
+                .font(.custom("Montserrat-Medium", size: 13))
                 .padding(.top)
                 
-                VStack(alignment: .leading, spacing: 16) {
+                // MARK: About Movie VStack
+                VStack(alignment: .leading) {
                     Text("About Movie")
-                        .font(.headline)
+                        .font(.custom("Poppins-Regular", size: 18))
                         .padding(.vertical, 4)
                     
                     RoundedRectangle(cornerRadius: 0)
                         .frame(height: 4)
-                        .foregroundStyle(Color(hex: "#3A3F47"))
+                        .foregroundStyle(Color(hex: "#C6C6C6"))
                     
-                    Text(movie.overview)
-                        .font(.body)
+                    Text(viewModel.movieInfo?.overview ?? "")
+                        .font(.custom("Poppins-Regular", size: 14))
                         .padding(.top, 15)
                 }
-                .padding(.horizontal)
+                .padding(.top, 30)
+                .padding(.horizontal, 30)
             }
         }
     }
 }
 
-#Preview {
-    MovieDetailsView(movie: Movie(backdropPath: "/fqv8v6AycXKsivp1T5yKtLbGXce.jpg", genreIds: [1], id: 653346, overview: "Several generations in the future following Caesar's reign, apes are now the dominant species and live harmoniously while humans have been reduced to living in the shadows. As a new tyrannical ape leader builds his empire, one young ape undertakes a harrowing journey that will cause him to question all that he has known about the past and to make choices that will define a future for apes and humans alike.", posterPath: "/gKkl37BQuKTanygYQG1pyYgLVgf.jpg", releaseDate: "2024-05-08", title: "Kingdom of the Planet of the Apes", voteAverage: 6.925, voteCount: 12))
-}
-
-
 // MARK: - Navigation Bar Back Button Visual
-
-struct MenuView : View {
+struct NavigationView : View {
     
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     var movie: Movie
@@ -178,6 +195,7 @@ struct MenuView : View {
                 Spacer()
 
                 Text(movie.title)
+                    .font(.subheadline)
                     .multilineTextAlignment(.center)
 
                 Spacer()
@@ -197,3 +215,8 @@ struct MenuView : View {
         }
     }
 }
+
+#Preview {
+    MovieDetailsView(movie: Movie(backdropPath: "EUF", genreIds: [1], id: 62000, overview: "AUF", posterPath: "EUF", releaseDate: "AUF", title: "EUF", voteAverage: 6.925, voteCount: 12))
+}
+

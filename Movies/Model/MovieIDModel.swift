@@ -12,7 +12,6 @@ final class MovieID {
         let results: [Movie]
     }
     
-    // MARK: - Only using: ID, releaseDate, PosterPath, title, voteAverage, voteCount
     struct Movie: Codable, Identifiable, Hashable {
         let id: Int
     }

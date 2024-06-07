@@ -13,9 +13,9 @@ struct MovieListView: View {
     @State private var path = NavigationPath()
     
     let columns = [
-        GridItem(.flexible(minimum: 100, maximum: 200)),
-        GridItem(.flexible(minimum: 100, maximum: 200)),
-        GridItem(.flexible(minimum: 100, maximum: 200))
+        GridItem(.flexible(minimum: 100, maximum: 250)),
+        GridItem(.flexible(minimum: 100, maximum: 250)),
+        GridItem(.flexible(minimum: 100, maximum: 250))
     ]
     
     // MARK: - View
@@ -34,7 +34,7 @@ struct MovieListView: View {
                     LazyVGrid(columns: columns) {
                         ForEach(viewModel.allMovies) { movie in
                             NavigationLink(value: movie) {
-                                MovieRow(movie: movie, height: 200)
+                                MovieRow(movie: movie, height: 220)
                             }
                         }
                     }

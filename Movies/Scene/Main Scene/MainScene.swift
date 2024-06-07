@@ -28,8 +28,8 @@ struct MainScene: View {
             }
             
             CustomTabBar(selectedTab: $selectedTab, tabBarItems: [
-                TabBarItem(title: "Movies", imageName: "movieclapper.fill"),
-                TabBarItem(title: "Search", imageName: "magnifyingglass"),
+                TabBarItem(title: "Home", imageName: "Home"),
+                TabBarItem(title: "Search", imageName: "Search"),
             ])
         }
         .edgesIgnoringSafeArea(.bottom)
@@ -52,19 +52,17 @@ struct CustomTabBar: View {
         HStack {
             ForEach(0..<2) { index in
                 VStack {
-                    Rectangle()
-                        .frame(height: 2)
-                        .frame(width: 150)
-                        .foregroundColor(selectedTab == index ? Color(hex: "#f0ca6b") : .clear)
-                    Image(systemName: tabBarItems[index].imageName)
+                    Image(tabBarItems[index].imageName)
+                        .renderingMode(.template)
                         .font(.system(size: 24))
-                        .foregroundColor(selectedTab == index ? Color(hex: "#decc9e") : .gray)
+                        .foregroundColor(selectedTab == index ? Color(hex: "#0296E5") : Color(hex: "67686D"))
                         .padding(.top, 2)
                     Text(tabBarItems[index].title)
-                        .font(.system(size: 12))
-                        .foregroundColor(selectedTab == index ? Color(hex: "#decc9e") : .gray)
+                        .font(.custom("Roboto-Medium", size: 12))
+                        .foregroundColor(selectedTab == index ? Color(hex: "#0296E5") : Color(hex: "67686D"))
                     Spacer()
                 }
+                .padding(.top)
                 .frame(maxWidth: .infinity)
                 .frame(height: 80)
                 .onTapGesture {

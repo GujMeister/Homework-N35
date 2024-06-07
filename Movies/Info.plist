@@ -4,9 +4,9 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>FiraGO-Bold.ttf</string>
 		<string>Poppins-Regular.ttf</string>
-		<string>FiraGO-Regular.ttf</string>
+		<string>Montserrat-SemiBold.ttf</string>
+		<string>Roboto-Medium.ttf</string>
 		<string>Montserrat-SemiBold.ttf</string>
 	</array>
 </dict>
