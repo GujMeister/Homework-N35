@@ -110,9 +110,7 @@ struct MovieDetailsView: View {
                         HStack {
                             Text(viewModel.movieInfo?.title ?? "")
                                 .font(.custom("Montserrat-SemiBold", size: 18))
-//                                .frame(minWidth: 50, maxWidth: 210)
-//                            .padding(.leading, -20)
-                            .padding(.bottom, 3)
+                                .padding(.bottom, 3)
                             
                             Spacer()
                         }

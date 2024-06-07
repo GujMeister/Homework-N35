@@ -32,6 +32,7 @@
 		854863532C137333009CFC0A /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854863522C137333009CFC0A /* SearchModel.swift */; };
 		854863552C139772009CFC0A /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 854863542C139772009CFC0A /* Roboto-Medium.ttf */; };
 		854863572C13A2CD009CFC0A /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 854863562C13A2CD009CFC0A /* Launch Screen.storyboard */; };
+		856680D72C13BB52004E92C1 /* PersonSearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856680D62C13BB52004E92C1 /* PersonSearchModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +62,7 @@
 		854863522C137333009CFC0A /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
 		854863542C139772009CFC0A /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		854863562C13A2CD009CFC0A /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		856680D62C13BB52004E92C1 /* PersonSearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonSearchModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +144,7 @@
 				854863482C134834009CFC0A /* MovieSearchModel.swift */,
 				854863522C137333009CFC0A /* SearchModel.swift */,
 				8548634A2C134A16009CFC0A /* MovieIDModel.swift */,
+				856680D62C13BB52004E92C1 /* PersonSearchModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 				854863432C125F21009CFC0A /* MovieDetailsView.swift in Sources */,
 				854863272C0FB791009CFC0A /* Color.swift in Sources */,
 				854863532C137333009CFC0A /* SearchModel.swift in Sources */,
+				856680D72C13BB52004E92C1 /* PersonSearchModel.swift in Sources */,
 				854863452C125F2D009CFC0A /* MovieDetailsVM.swift in Sources */,
 				8548632F2C0FC37D009CFC0A /* CacheAsyncImage.swift in Sources */,
 				8548634B2C134A16009CFC0A /* MovieIDModel.swift in Sources */,

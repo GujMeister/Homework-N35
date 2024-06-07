@@ -35,11 +35,18 @@ struct MovieSearchView: View {
                 // MARK: Dropdown menu
                 Menu {
                     ForEach(categories, id: \.self) { category in
-                        Button(category, action: {
+                        Button(action: {
                             selectedCategory = category
                             hasSearched = false
                             viewModel.movieSearchDetails = []
-                        })
+                        }) {
+                            HStack {
+                                Text(category)
+                                if selectedCategory == category {
+                                    Image(systemName: "checkmark")
+                                }
+                            }
+                        }
                     }
                 } label: {
                     Image("Elipse")
@@ -164,17 +171,17 @@ struct MovieCell: View {
                         image
                             .resizable()
                             .aspectRatio(contentMode: .fill)
-                            .frame(width: 95, height: 130)
+                            .frame(width: 95, height: 140)
                             .cornerRadius(10)
                     case .empty:
                         ProgressView()
-                            .frame(width: 95, height: 130)
+                            .frame(width: 95, height: 140)
                     case .failure:
                         Image(systemName: "questionmark")
-                            .frame(width: 95, height: 130)
+                            .frame(width: 95, height: 140)
                     @unknown default:
                         Image(systemName: "questionmark")
-                            .frame(width: 95, height: 130)
+                            .frame(width: 95, height: 140)
                     }
                 }
             }
@@ -193,18 +200,24 @@ struct MovieCell: View {
                 
                 HStack {
                     Image("Ticket")
+                        .renderingMode(.template)
+                        .foregroundStyle(Color(UIColor.label))
                     Text(movie.genres.first?.name ?? "Unknown")
                         .font(.custom("Poppins-Regular", size: 12))
                 }
                 
                 HStack {
                     Image("Calendar")
+                        .renderingMode(.template)
+                        .foregroundStyle(Color(UIColor.label))
                     Text(movie.releaseDate.components(separatedBy: "-").first ?? "Unknown")
                         .font(.custom("Poppins-Regular", size: 12))
                 }
                 
                 HStack {
                     Image("Clock")
+                        .renderingMode(.template)
+                        .foregroundStyle(Color(UIColor.label))
                     Text("\(movie.runtime) minutes")
                         .font(.custom("Poppins-Regular", size: 12))
                 }
@@ -215,5 +228,6 @@ struct MovieCell: View {
             Spacer()
         }
         .padding()
+        .padding(.top, -20)
     }
 }

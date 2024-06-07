@@ -26,13 +26,13 @@ struct MovieRow: View {
                             .frame(width: 110, height: 165)
                     case .empty:
                         ProgressView()
-                            .frame(width: 100, height: 145)
+                            .frame(width: 110, height: 165)
                     case .failure(let error):
                         ErrorView(error: error)
-                            .frame(width: 100, height: 145)
+                            .frame(width: 110, height: 165)
                     @unknown default:
                         Image(systemName: "questionmark")
-                            .frame(width: 100, height: 145)
+                            .frame(width: 110, height: 165)
                     }
                 }
                 .padding(.top, 10)

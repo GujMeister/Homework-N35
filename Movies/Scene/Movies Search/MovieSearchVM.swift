@@ -14,7 +14,7 @@ final class MovieSearchViewModel: ObservableObject {
     @Published var isLoading = false
     private let apiKey = "22392d65a7c9e67e5e3105aca487aec4"
     
-    // MARK: - Name and Year Searching
+    // MARK: - Search function
     func searchMovies(query: String, category: String) {
         movieSearchDetails = []
         isLoading = true
@@ -25,6 +25,7 @@ final class MovieSearchViewModel: ObservableObject {
         }
     }
     
+    // MARK: - Fetching functions
     private func searchMoviesByName(query: String) {
         guard !query.isEmpty else {
             movieSearchDetails = []
@@ -73,6 +74,7 @@ final class MovieSearchViewModel: ObservableObject {
         }
     }
 
+    // MARK: - Helper Functions
     private func fetchMovieDetails(for movieIDs: [Int]) {
         let dispatchGroup = DispatchGroup()
         var detailedMovies: [Search.SearchDetailInfo] = []
@@ -99,4 +101,6 @@ final class MovieSearchViewModel: ObservableObject {
             self.isLoading = false
         }
     }
+    
+    
 }
