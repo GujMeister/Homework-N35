@@ -16,7 +16,9 @@ struct MoviesApp: App {
         }
         .modelContainer(for: FavouriteMovie.self)
     }
-    init() {
-        print(URL.applicationSupportDirectory.path(percentEncoded: false))
-    }
 }
+
+//    init() {
+//        print(URL.applicationSupportDirectory.path(percentEncoded: false))
+//    }
+// Printing Path to the SwiftData in local files

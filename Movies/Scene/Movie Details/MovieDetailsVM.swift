@@ -10,19 +10,21 @@ import SimpleNetworking
 
 final class MovieDetailsViewModel: ObservableObject {
     
-    @Published var passedMovie: Movie
     @Published var movieInfo: DetailInfo?
+    @Published var passedMovieID: Int
     
-    init(passedMovie: Movie) {
-        self.passedMovie = passedMovie
+    init(passedMovieID: Int) {
+        self.passedMovieID = passedMovieID
         fetchDetails()
     }
     
     private func fetchDetails() {
-        WebService().fetchData(from: "https://api.themoviedb.org/3/movie/\(passedMovie.id)?api_key=22392d65a7c9e67e5e3105aca487aec4", resultType: DetailInfo.self) { [weak self] data in
+        WebService().fetchData(from: "https://api.themoviedb.org/3/movie/\(passedMovieID)?api_key=22392d65a7c9e67e5e3105aca487aec4", resultType: DetailInfo.self) { [weak self] data in
             switch data {
             case .success(let movieDetails):
-                self?.movieInfo = movieDetails
+                DispatchQueue.main.async {
+                    self?.movieInfo = movieDetails
+                }
             case .failure(let error):
                 print("Error fetching page info: \(error)")
             }

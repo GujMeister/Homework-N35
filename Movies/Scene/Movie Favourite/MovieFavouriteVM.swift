@@ -17,6 +17,7 @@ final class MovieFavouriteVM: ObservableObject {
         
         for movie in movies {
             dispatchGroup.enter()
+            
             let urlString = "https://api.themoviedb.org/3/movie/\(movie.id)?api_key=22392d65a7c9e67e5e3105aca487aec4"
             WebService().fetchData(from: urlString, resultType: DetailInfo.self) { [weak self] data in
                 switch data {
@@ -36,3 +37,4 @@ final class MovieFavouriteVM: ObservableObject {
         }
     }
 }
+

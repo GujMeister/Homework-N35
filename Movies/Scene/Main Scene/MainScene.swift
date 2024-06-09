@@ -33,7 +33,7 @@ struct MainScene: View {
             CustomTabBar(selectedTab: $selectedTab, tabBarItems: [
                 TabBarItem(title: "Home", imageName: "Home"),
                 TabBarItem(title: "Search", imageName: "Search"),
-                TabBarItem(title: "Faves", imageName: "")
+                TabBarItem(title: "Favourites", imageName: "Favourites")
             ])
         }
         .edgesIgnoringSafeArea(.bottom)

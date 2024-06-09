@@ -92,8 +92,8 @@
 		8525160E2C14EB8A003393C8 /* Movie Favourite */ = {
 			isa = PBXGroup;
 			children = (
-				8525160F2C14EBAE003393C8 /* MovieFavouriteVM.swift */,
 				852516112C14EBB9003393C8 /* MovieFavoriteView.swift */,
+				8525160F2C14EBAE003393C8 /* MovieFavouriteVM.swift */,
 			);
 			path = "Movie Favourite";
 			sourceTree = "<group>";

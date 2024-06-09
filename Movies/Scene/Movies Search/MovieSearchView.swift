@@ -85,7 +85,8 @@ struct MovieSearchView: View {
                         }
                     } else {
                         ForEach(viewModel.movieSearchDetails, id: \.title) { movie in
-                            MovieCell(movie: movie)
+                            MovieDetailsCell(posterPath: movie.posterPath ?? "", title: movie.title, voteAverage: movie.voteAverage, genre: movie.genres.first?.name ?? "Unknown genre", releaseDate: movie.releaseDate, runtime: movie.runtime)
+                            
                                 .listRowSeparator(.hidden)
                                 .listRowBackground(Color(UIColor.systemBackground))
                         }
@@ -168,7 +169,7 @@ struct PlaceholderView: View {
             
             Text(secondText)
                 .multilineTextAlignment(.center)
-                .font(.custom("Montserrat-Medium", size: 14))
+                .font(.custom("Montserrat", size: 12))
                 .foregroundColor(Color(hex: "92929D"))
                 .padding(.top, 20)
             

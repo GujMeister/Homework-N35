@@ -8,7 +8,7 @@
 import Foundation
 
 struct DetailInfo: Decodable, Identifiable {
-    let id = UUID()
+    let id: Int?
     let backdropPath: String?
     let genres: [Genre]
     let overview: String
@@ -19,6 +19,7 @@ struct DetailInfo: Decodable, Identifiable {
     let voteAverage: Double
 
     enum CodingKeys: String, CodingKey {
+        case id
         case backdropPath = "backdrop_path"
         case genres
         case overview

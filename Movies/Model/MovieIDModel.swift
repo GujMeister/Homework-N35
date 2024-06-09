@@ -8,11 +8,11 @@
 import Foundation
 
 final class MovieID {
-    struct MovieResponse: Codable {
+    struct MovieResponse: Decodable {
         let results: [Movie]
     }
     
-    struct Movie: Codable, Identifiable, Hashable {
+    struct Movie: Decodable, Identifiable, Hashable {
         let id: Int
     }
 }

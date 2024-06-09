@@ -41,7 +41,7 @@ struct MovieListView: View {
                 }
             }
             .navigationDestination(for: Movie.self) { movie in
-                MovieDetailsView(movie: movie)
+                MovieDetailsView(movieID: movie.id)
             }
         }
     }
