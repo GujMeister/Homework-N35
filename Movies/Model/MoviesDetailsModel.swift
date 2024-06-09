@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct DetailInfo: Decodable {
+struct DetailInfo: Decodable, Identifiable {
+    let id = UUID()
     let backdropPath: String?
     let genres: [Genre]
     let overview: String

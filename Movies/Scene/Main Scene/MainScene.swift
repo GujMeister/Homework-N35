@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct MainScene: View {
     // MARK: Properties
@@ -19,6 +20,8 @@ struct MainScene: View {
                     .tag(0)
                 MovieSearchView()
                     .tag(1)
+                MovieFavoriteView()
+                    .tag(2)
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             .onChange(of: selectedTab) { oldValue, newValue in
@@ -30,6 +33,7 @@ struct MainScene: View {
             CustomTabBar(selectedTab: $selectedTab, tabBarItems: [
                 TabBarItem(title: "Home", imageName: "Home"),
                 TabBarItem(title: "Search", imageName: "Search"),
+                TabBarItem(title: "Faves", imageName: "")
             ])
         }
         .edgesIgnoringSafeArea(.bottom)
@@ -50,7 +54,7 @@ struct CustomTabBar: View {
     
     var body: some View {
         HStack {
-            ForEach(0..<2) { index in
+            ForEach(0..<3) { index in
                 VStack {
                     Image(tabBarItems[index].imageName)
                         .renderingMode(.template)
