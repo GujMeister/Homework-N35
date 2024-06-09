@@ -11,8 +11,21 @@ import SwiftData
 @Model
 class FavouriteMovie {
     @Attribute var movieID: Int
-    
-    init(movieID: Int = 0) {
-        self.movieID = movieID
+    @Attribute var posterPath: String?
+    @Attribute var title: String
+
+    init(movie: Movie) {
+        self.movieID = movie.id
+        self.posterPath = movie.posterPath
+        self.title = movie.title
     }
 }
+
+//@Model
+//class FavouriteMovie {
+//    @Attribute var movieID: Int
+//    
+//    init(movieID: Int = 0) {
+//        self.movieID = movieID
+//    }
+//}

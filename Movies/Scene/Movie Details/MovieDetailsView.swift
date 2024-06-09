@@ -9,12 +9,11 @@ import SwiftUI
 import SwiftData
 
 struct MovieDetailsView: View {
-    
     @State var movie: Movie
     @StateObject var viewModel: MovieDetailsViewModel
     
     @Environment(\.modelContext) var modelContext
-    @Query var movies: [FavouriteMovie]
+    @Query var favouriteMovies: [FavouriteMovie]
     
     @State private var isFavorite: Bool = false
     
@@ -124,8 +123,6 @@ struct MovieDetailsView: View {
                     .padding(.leading, 25)
                     .padding(.top, -90)
                     
-                    
-                    
                     // MARK: Info View
                     HStack {
                         HStack(spacing: 4) {
@@ -197,11 +194,11 @@ struct MovieDetailsView: View {
     
     func toggleFavorite() {
         if isFavorite {
-            if let favouriteMovie = movies.first(where: { $0.movieID == movie.id }) {
+            if let favouriteMovie = favouriteMovies.first(where: { $0.movieID == movie.id }) {
                 modelContext.delete(favouriteMovie)
             }
         } else {
-            let newFavourite = FavouriteMovie(movieID: movie.id)
+            let newFavourite = FavouriteMovie(movie: movie)
             modelContext.insert(newFavourite)
         }
         
@@ -214,17 +211,17 @@ struct MovieDetailsView: View {
     }
     
     func checkIfFavorite() {
-        isFavorite = movies.contains(where: { $0.movieID == movie.id })
+        isFavorite = favouriteMovies.contains(where: { $0.movieID == movie.id })
     }
 }
 
 // MARK: - Navigation Bar Back Button Visual
-struct NavigationView : View {
+struct NavigationView: View {
     
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     var movie: Movie
     
-    var body : some View {
+    var body: some View {
         VStack {
             HStack {
                 Button {

@@ -12,12 +12,12 @@ import SimpleNetworking
 final class MovieFavouriteVM: ObservableObject {
     @Published var movieDetails: [DetailInfo] = []
 
-    func fetchMovieDetails(for movies: [FavouriteMovie]) {
+    func fetchMovieDetails(for movies: [Movie]) {
         let dispatchGroup = DispatchGroup()
         
         for movie in movies {
             dispatchGroup.enter()
-            let urlString = "https://api.themoviedb.org/3/movie/\(movie.movieID)?api_key=22392d65a7c9e67e5e3105aca487aec4"
+            let urlString = "https://api.themoviedb.org/3/movie/\(movie.id)?api_key=22392d65a7c9e67e5e3105aca487aec4"
             WebService().fetchData(from: urlString, resultType: DetailInfo.self) { [weak self] data in
                 switch data {
                 case .success(let movie):
@@ -25,7 +25,7 @@ final class MovieFavouriteVM: ObservableObject {
                         self?.movieDetails.append(movie)
                     }
                 case .failure(let error):
-                    print("Error fetching details for movie ID \(movie.movieID): \(error)")
+                    print("Error fetching details for movie ID \(movie.id): \(error)")
                 }
                 dispatchGroup.leave()
             }
@@ -36,4 +36,3 @@ final class MovieFavouriteVM: ObservableObject {
         }
     }
 }
-

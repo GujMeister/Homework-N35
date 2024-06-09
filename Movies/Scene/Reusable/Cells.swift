@@ -179,3 +179,70 @@ struct PersonCell: View {
     }
 }
 
+
+// es da zeda igivea da rame sheucvale ro erti gaxeds
+struct FavouritesMovieCell: View {
+    let movie: DetailInfo
+    
+    var body: some View {
+        HStack {
+            if let posterPath = movie.posterPath, let url = URL(string: "https://image.tmdb.org/t/p/w500/\(posterPath)") {
+                CacheAsyncImage(url: url) { AsyncImagePhase in
+                    switch AsyncImagePhase {
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 95, height: 130)
+                            .cornerRadius(10)
+                    case .empty:
+                        ProgressView()
+                            .frame(width: 95, height: 130)
+                    case .failure:
+                        Image(systemName: "questionmark")
+                            .frame(width: 95, height: 130)
+                    @unknown default:
+                        Image(systemName: "questionmark")
+                            .frame(width: 95, height: 130)
+                    }
+                }
+            }
+            
+            VStack(alignment: .leading) {
+                Text(movie.title)
+                    .font(.custom("Poppins-Regular", size: 16))
+                
+                HStack {
+                    Image("Star")
+                        .foregroundColor(.yellow)
+                    Text(String(format: "%.1f", movie.voteAverage))
+                        .foregroundColor(Color(hex: "#FF8700"))
+                        .font(.custom("Montserrat-SemiBold", size: 12))
+                }
+                
+                HStack {
+                    Image("Ticket")
+                    Text(movie.genres.first?.name ?? "Unknown")
+                        .font(.custom("Poppins-Regular", size: 12))
+                }
+                
+                HStack {
+                    Image("Calendar")
+                    Text(movie.releaseDate.components(separatedBy: "-").first ?? "Unknown")
+                        .font(.custom("Poppins-Regular", size: 12))
+                }
+                
+                HStack {
+                    Image("Clock")
+                    Text("\(movie.runtime) minutes")
+                        .font(.custom("Poppins-Regular", size: 12))
+                }
+            }
+            .foregroundColor(Color(UIColor.label))
+            .padding(.leading, 5)
+            
+            Spacer()
+        }
+        .padding()
+    }
+}

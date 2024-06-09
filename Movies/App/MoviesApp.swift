@@ -16,4 +16,7 @@ struct MoviesApp: App {
         }
         .modelContainer(for: FavouriteMovie.self)
     }
+    init() {
+        print(URL.applicationSupportDirectory.path(percentEncoded: false))
+    }
 }
