@@ -13,11 +13,10 @@ struct MovieDetailsView: View {
     @State var movieID: Int
     @State private var isFavorite: Bool = false
     @StateObject var viewModel: MovieDetailsViewModel
-    
     @Environment(\.modelContext) var modelContext
     @Query var favouriteMovies: [FavouriteMovie]
 
-    // MARK: Init
+    // MARK: init
     init(movieID: Int) {
         self.movieID = movieID
         _viewModel = StateObject(wrappedValue: MovieDetailsViewModel(passedMovieID: movieID))

@@ -20,12 +20,16 @@ final class MovieSearchViewModel: ObservableObject {
         movieSearchDetails = []
         personSearchResults = []
         isLoading = true
-        if category == "Name" {
+        
+        switch category {
+        case "Name":
             searchMoviesByName(query: query)
-        } else if category == "Year" {
+        case "Year":
             searchMoviesByYear(year: query)
-        } else if category == "Person" {
+        case "Person":
             searchPerson(query: query)
+        default:
+            break
         }
     }
     
@@ -132,7 +136,6 @@ final class MovieSearchViewModel: ObservableObject {
         }
     }
 }
-
 
 // ეს არის კოდი რომელსაც ყველა პერსონაჟი მოაქ. უბრალოდ იმდენი ხანი უნდა ლოუდინგი რო არ ღირს და გადავწყვიტე ყველა კატეგორიაზე პირველი გვერდები წამომეღო.
 /*

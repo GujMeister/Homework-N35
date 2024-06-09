@@ -10,8 +10,10 @@ import SwiftData
 import SimpleNetworking
 
 final class MovieFavouriteVM: ObservableObject {
+    // MARK: Properties
     @Published var movieDetails: [DetailInfo] = []
 
+    // MARK: Functions
     func fetchMovieDetails(for movies: [Movie]) {
         let dispatchGroup = DispatchGroup()
         

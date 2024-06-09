@@ -47,7 +47,6 @@ struct MovieListView: View {
     }
 }
     
-    
     // MARK: - Preview
     #Preview {
         MovieListView()

@@ -70,7 +70,7 @@ struct MovieSearchView: View {
                 
                 Spacer()
             } else if !hasSearched {
-                PlaceholderView(text: "Use The Magic Search!", secondText: "I will do my best to search everything\n relevant, I promise!")
+                PlaceholderView(text: "Use The Magic Search!", secondText: "I will do my best to search everything\nthat's relevant, I promise!")
             } else if selectedCategory == "Person" && viewModel.personSearchResults.isEmpty {
                 PlaceholderView(text: "Oh No Isn’t This So Embarrassing?", secondText: "I cannot find any person with this name.")
             } else if viewModel.movieSearchDetails.isEmpty && viewModel.personSearchResults.isEmpty {
@@ -187,4 +187,3 @@ extension Notification.Name {
 #Preview {
     MovieSearchView()
 }
-

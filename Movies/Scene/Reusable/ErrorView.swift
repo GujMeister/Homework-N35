@@ -8,10 +8,8 @@
 import SwiftUI
 
 struct ErrorView: View {
-    // MARK:  Properties
     let error: Error
     
-    // MARK: - View
     var body: some View {
         print(error)
         return Text("❌").font(.system(size: 20))

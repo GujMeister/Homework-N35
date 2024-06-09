@@ -17,7 +17,6 @@ struct MovieFavoriteView: View {
     @Query var favouriteMovies: [FavouriteMovie]
     @State private var navigationPath = NavigationPath()
 
-    
     // MARK: - View
     var body: some View {
         NavigationStack(path: $navigationPath) {
@@ -47,13 +46,13 @@ struct MovieFavoriteView: View {
                             }
                         }
                     }
-                    .navigationDestination(for: Int.self) { movieID in
-                        MovieDetailsView(movieID: movieID)
-                    }
                     .onAppear {
                         viewModel.movieDetails.removeAll()
                         let movies = favouriteMovies.map { Movie(id: $0.id, posterPath: $0.posterPath, title: $0.title) }
                         viewModel.fetchMovieDetails(for: movies)
+                    }
+                    .navigationDestination(for: Int.self) { movieID in
+                        MovieDetailsView(movieID: movieID)
                     }
                 }
             }
