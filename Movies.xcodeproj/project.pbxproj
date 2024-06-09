@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		8525160C2C14E377003393C8 /* FavouriteMovies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8525160B2C14E377003393C8 /* FavouriteMovies.swift */; };
-		852516102C14EBAE003393C8 /* MovieFavouriteVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8525160F2C14EBAE003393C8 /* MovieFavouriteVM.swift */; };
 		852516122C14EBB9003393C8 /* MovieFavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852516112C14EBB9003393C8 /* MovieFavoriteView.swift */; };
 		854863062C0FA158009CFC0A /* MoviesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854863052C0FA158009CFC0A /* MoviesApp.swift */; };
 		8548630A2C0FA15A009CFC0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 854863092C0FA15A009CFC0A /* Assets.xcassets */; };
@@ -39,7 +38,6 @@
 
 /* Begin PBXFileReference section */
 		8525160B2C14E377003393C8 /* FavouriteMovies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteMovies.swift; sourceTree = "<group>"; };
-		8525160F2C14EBAE003393C8 /* MovieFavouriteVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieFavouriteVM.swift; sourceTree = "<group>"; };
 		852516112C14EBB9003393C8 /* MovieFavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieFavoriteView.swift; sourceTree = "<group>"; };
 		854863022C0FA158009CFC0A /* Movies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Movies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		854863052C0FA158009CFC0A /* MoviesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesApp.swift; sourceTree = "<group>"; };
@@ -93,7 +91,6 @@
 			isa = PBXGroup;
 			children = (
 				852516112C14EBB9003393C8 /* MovieFavoriteView.swift */,
-				8525160F2C14EBAE003393C8 /* MovieFavouriteVM.swift */,
 			);
 			path = "Movie Favourite";
 			sourceTree = "<group>";
@@ -343,7 +340,6 @@
 				854863212C0FA41D009CFC0A /* MovieListVM.swift in Sources */,
 				854863492C134834009CFC0A /* MovieSearchModel.swift in Sources */,
 				854863322C109E6B009CFC0A /* ErrorView.swift in Sources */,
-				852516102C14EBAE003393C8 /* MovieFavouriteVM.swift in Sources */,
 				8548632A2C0FBEDC009CFC0A /* MovieSearchVM.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

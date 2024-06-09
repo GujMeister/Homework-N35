@@ -12,7 +12,6 @@ import SwiftData
 
 struct MovieFavoriteView: View {
     // MARK: Properties
-    @StateObject private var viewModel = MovieFavouriteVM()
     @Environment(\.modelContext) private var modelContext
     @Query var favouriteMovies: [FavouriteMovie]
     @State private var navigationPath = NavigationPath()
@@ -45,11 +44,6 @@ struct MovieFavoriteView: View {
 
                             }
                         }
-                    }
-                    .onAppear {
-                        viewModel.movieDetails.removeAll()
-                        let movies = favouriteMovies.map { Movie(id: $0.id, posterPath: $0.posterPath, title: $0.title) }
-                        viewModel.fetchMovieDetails(for: movies)
                     }
                     .navigationDestination(for: Int.self) { movieID in
                         MovieDetailsView(movieID: movieID)
